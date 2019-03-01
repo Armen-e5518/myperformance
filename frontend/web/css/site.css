@@ -1,0 +1,58 @@
+#login-form input {
+    padding: 10px;
+}
+
+.active-text {
+    border: 1px #00adc6 solid;
+    color: black !important;
+}
+
+.requests-list a {
+    color: #7f4b9b !important;;
+}
+
+.fa-trash-alt {
+    color: #de012f;
+}
+
+.edit-d {
+    cursor: pointer;
+}
+
+.popup-layer-loader {
+    width: 100px;
+    margin: 20% auto auto;
+}
+
+span.select2-selection__clear {
+    right: 2rem !important;
+    top: 4px !important;
+}
+
+.hide-a {
+    display: none;
+}
+
+.common-list {
+    position: relative;
+}
+
+.delete {
+    color: #e92841;
+    position: absolute;
+    right: 25px;
+    font-size: 18px;
+}
+
+.logout {
+    position: absolute;
+    right: 11px;
+}
+
+.menu-block {
+    position: relative;
+}
+
+.element {
+    cursor: pointer;
+}

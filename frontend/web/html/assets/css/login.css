@@ -1,0 +1,210 @@
+html,
+body {
+	height:100%;
+}
+
+body,
+a,
+button,
+input,
+input::placeholder {
+	font-family: Roboto;
+	color:#fff;
+	outline:none;
+	transition:all .5s;
+}
+
+.uppercase {
+	text-transform:uppercase;
+}
+
+	.login-page {
+		position: relative;
+	}
+	
+		.body-bg-img {
+			width: 100%;
+			height: 100vh;
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			z-index: -1;
+			object-fit: cover;
+		}
+	
+		.login-page .container {
+			padding:30px 8vw;
+			width: 50%;
+		}
+			
+			.logo a {
+				display:inline-block;
+			}
+		
+				.logo img {
+					max-width:426px;
+					width:100%;
+				}
+			
+			.access-area h1 {
+				width:55%;
+				margin-top:35px;
+				font-size:50px;
+				font-weight:700;
+				line-height: 55px;
+			}
+			
+			.access-form {
+				margin:67px auto auto;
+			}
+			
+				.welcome-heading {
+					margin-bottom:31px;
+					font-size:22px;
+					font-weight:700;
+					color:rgba(255, 255, 255, .5);
+				}
+				
+				.access-form-row {
+					padding-bottom: 28px;
+					font-size:15px;
+				}
+					
+						.access-form input[type="text"],
+						.access-form input[type="password"] {
+							padding-left: 0;
+							padding-right: 0;
+							border:0;
+							border-bottom:1px #e9edf8 solid !important;
+							width:100%;
+							background:transparent;
+							font-size:16px;
+							font-weight:100;
+							line-height:42px;
+							border-radius: 0;
+							box-shadow: none !important;
+							color: #fff;
+						}
+
+						.access-form input[type="text"]::placeholder,
+						.access-form input[type="password"]::placeholder {
+							color:#fff;
+						}
+
+						.access-form .help-block-error {
+							font-weight: 300;
+							color: #f00;
+						}
+						
+						
+						.access-form-row:nth-of-type(4) {
+							display: flex;
+							justify-content: space-between;
+						}
+						
+							.access-form-row label[for="remember-me"] input {
+								display:none;
+							}
+							
+							.access-form-row label .remember-me:before {
+								content:"";
+								display:inline-block;
+								margin-right:12px;
+								width:21px;
+								height:21px;
+								border:2px rgba(255, 255, 255, 1) solid;
+								vertical-align: middle;
+								transition:all .5s;
+							}
+							.access-form-row label{
+								width: 100%;
+							}
+							.access-form-row label[for="remember-me"]{
+								width: auto;
+							}
+							.access-form-row label[for="remember-me"] input:checked ~ .remember-me:before {
+								box-shadow: 0 0 1px 3px rgba(255, 255, 255, 1) inset;
+							}
+								
+							.access-form-row:nth-of-type(4) a {
+								margin-bottom: 5px;
+								text-decoration:none;
+								padding-bottom:0;
+								border-bottom:1px #fff solid;
+							}
+								
+							.access-form-row:nth-of-type(4) a:hover {
+								border-color:transparent;
+								color: #fff;
+							}
+					
+						.access-form-row label > a {
+							text-decoration:underline;
+						}
+					
+						.access-form-row label > a:hover {
+							text-decoration:none;
+						}
+					
+							.access-form-row label > a i {
+								margin-right:5px;
+							}
+						
+					.access-form button {
+						border:0;
+						border-radius:20px;
+						margin:0;
+						margin-top:28px;
+						width:156px;
+						padding-top:0;
+						padding-bottom:0;
+						line-height:46px;
+						background:#512178;
+						font-size:18px;
+						font-weight:300;
+						cursor:pointer;
+						outline:none !important;
+					}
+					
+					.access-form button:hover {
+						opacity: 1;
+						background: #512178;
+						color:rgba(255, 255, 255, .5);
+					}
+					
+					
+@media screen and (max-width:1080px) {
+	.login-page .container {
+		width: 100%;
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+	
+		.access-area h1 {
+			width: 100%;
+			font-size: 40px;
+			line-height: normal;
+		}
+}
+
+@media screen and (max-width:414px) {
+	.access-area h1 {
+		margin-top: 15px;
+		font-size: 30px;
+		line-height: 35px;
+	}
+	
+	.access-form {
+		margin-top: 30px;
+	}
+	
+	.welcome-heading {
+		font-size: 18px;
+	}
+}
+.login-page .container{
+	margin-right: 0!important;
+	margin-left: 0!important;
+}
