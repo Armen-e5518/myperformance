@@ -124,7 +124,7 @@ $this->title = "Coaching conversations |" . $year;
 <div class="popup-layer transition <?= $id ? 'active' : '' ?>">
     <div class="popup relative">
         <a href="/conversations/<?= $year ?>" class="popup-close absolute" title="Close popup"></a>
-        <h3>New coaching session</h3>
+        <h3><?= $id ? 'Coaching session' : "New coaching session" ?></h3>
         <div class="requests-list active absolute">
             <?php $form = \yii\bootstrap\ActiveForm::begin(); ?>
             <div class="request-body">
@@ -172,7 +172,7 @@ $this->title = "Coaching conversations |" . $year;
                 </div>
             </div>
             <div>
-                <button type="submit" class="submit-btn transition">Create session</button>
+                <button type="submit" class="submit-btn transition"><?= $id ? 'Save' : "Create session" ?></button>
             </div>
             <?php \yii\bootstrap\ActiveForm::end(); ?>
         </div>

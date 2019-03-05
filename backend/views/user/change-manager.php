@@ -4,10 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\User */
+/* @var $user backend\models\User */
 /* @var $form yii\widgets\ActiveForm */
 $this->registerJsFile('/js/jq.js');
 $this->registerJsFile('/js/user-create.js?v=2');
+$this->title = 'Add new manager';
 ?>
 
 <div class="user-form ">
@@ -16,7 +17,7 @@ $this->registerJsFile('/js/user-create.js?v=2');
             'autocomplete' => 'off'
         ],
     ]); ?>
-    <h2>User: <?= $model->first_name . ' ' . $model->last_name ?></h2>
+    <h2>User: <?= $user->first_name . ' ' . $user->last_name ?></h2>
     <div class="row">
         <div class="col-md-6">
             <label class="control-label" for="documents-category">Manager</label>
@@ -62,7 +63,7 @@ $this->registerJsFile('/js/user-create.js?v=2');
 
     <div class="form-group">
         <br>
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

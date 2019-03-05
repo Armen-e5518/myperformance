@@ -45,6 +45,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]),
             ],
             [
+                'attribute' => 'department_id',
+//                'format' => 'html',
+                'value' => function ($data) {
+                    return \common\models\Departments::GetTitleById($data->department_id);
+                },
+                'filter' => \kartik\select2\Select2::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'department_id',
+                    'data' => \common\models\Departments::GetAll(),
+                    'options' => [
+                        'placeholder' => 'Managers...',
+                    ]
+                ]),
+            ],
+            [
                 'attribute' => 'Avatar',
                 'format' => 'html',
                 'value' => function ($data) {

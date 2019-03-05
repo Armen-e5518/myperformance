@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 
+use backend\models\Manager;
 use common\models\Managers;
 use Yii;
 use backend\models\User;
@@ -61,22 +62,21 @@ class UserController extends Controller
 
     public function actionChangeManager($id)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->UpdateUser($id)) {
-            $year = Yii::$app->request->post('User')['year'];
-            $data = Managers::findOne(['user_id' => $model->id, 'manager_id' => $model->manager_id, 'year' => $year]);
+        $model = new Manager();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $data = Managers::findOne(['user_id' => $id, 'manager_id' => $model->manager_id, 'year' => $model->year]);
             if (empty($data)) {
                 $m = new Managers();
-                $m->user_id = $model->id;
-                $m->manager_id = $model->getOldAttribute('manager_id');
-                $m->year = Yii::$app->request->post('User')['year'];
+                $m->user_id = $id;
+                $m->manager_id = $model->manager_id;
+                $m->year = $model->year;
                 $m->save();
             }
             return $this->redirect(['update', 'id' => $id]);
         }
         return $this->render('change-manager', [
-            'model' => $model
+            'model' => $model,
+            'user' => User::findOne($id)
         ]);
     }
 
@@ -143,6 +143,13 @@ class UserController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionDeleteManager($id, $u)
+    {
+        Managers::deleteAll(['id' => $id]);
+
+        return $this->redirect(['update', 'id' => $u]);
     }
 
     /**

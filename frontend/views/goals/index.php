@@ -129,7 +129,7 @@ $class = 'hide';
     </section>
     <section class="main-bottom gray-bg">
         <div class="container flex">
-            <a class="purple-bg" href="#">
+            <a class="purple-bg" target="_blank" href="/Smart_handout.pdf">
                 <span><img src="/html/assets/images/icons/smart-goals.png"></span>
                 <h2>SMART objectives</h2>
                 <p>Read the guideline to help you shape up objectives for this year.</p>

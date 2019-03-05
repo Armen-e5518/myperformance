@@ -67,9 +67,13 @@ class ConversationsController extends Controller
             $model->year = Years::GetYearIdByYear($year);
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Calendar::CreateFile($model->date);
-            Mail::NewSession($model, $year);
+        if (Yii::$app->request->post() && $model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($id) {
+                Mail::SessionUpdated($model, $year);
+            }else{
+                Calendar::CreateFile($model->date);
+                Mail::NewSession($model, $year);
+            }
             return $this->redirect(['conversations/' . $year]);
         }
         return $this->render('index', [

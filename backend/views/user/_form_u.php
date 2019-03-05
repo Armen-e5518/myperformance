@@ -90,6 +90,11 @@ $model->password_hash = null;
                         <?php foreach ($managers as $manager): ?>
                             <li>
                                 <?= \common\models\Years::GetYearById($manager['year']) . ' ' . $manager['first_name'] . ' ' . $manager['last_name'] ?>
+                                <a href="/admin/user/delete-manager?id=<?= $manager['id'] ?>&u=<?= $model->id ?>"
+                                   title="Delete" aria-label="Delete"
+                                   data-confirm="Are you sure you want to delete this item?">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
                             </li>
                         <? endforeach; ?>
                     <? endif; ?>

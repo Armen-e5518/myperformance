@@ -40,6 +40,7 @@ class Mail extends Component
         }
         return true;
     }
+
     public static function SandFeedbackEmailExternal($model, $user_id, $year)
     {
         if (!empty($user_id)) {
@@ -102,7 +103,24 @@ class Mail extends Component
             ->attach(\Yii::getAlias('@frontend') . '/web/attach/session.ics')
             ->setSubject('New Session')
             ->send();
+    }
 
+    public static function SessionUpdated($model, $year)
+    {
+        $user = User::GetUserById($model->user_id);
+        $manager = User::GetUserById(\Yii::$app->user->getId());
+        return \Yii::$app->mailer
+            ->compose([
+                'html' => 'session_updated',
+                'text' => 'session_updated'
+            ], [
+                'user' => $user,
+                'year' => $year,
+            ])
+            ->setFrom([\Yii::$app->params['supportEmail'] => 'GT myPerformance'])
+            ->setTo($user->email)
+            ->setSubject($manager->first_name . ' ' . $manager->last_name . ' has added notes to the Coaching session ')
+            ->send();
     }
 
     public static function SandFeedbackAcceptEmail($user_id)
@@ -155,6 +173,44 @@ class Mail extends Component
             ->setTo($email)
             ->setSubject($title)
             ->setTextBody($text)
+            ->send();
+    }
+
+    public static function SubmitUser()
+    {
+        $user = User::GetUserById(\Yii::$app->user->getId());
+        $manager = User::GetUserById(\Yii::$app->user->identity->manager_id);
+
+        return \Yii::$app->mailer
+            ->compose([
+                'html' => 'submit_user',
+                'text' => 'submit_user'
+            ], [
+                'manager' => $manager,
+                'user' => $user,
+            ])
+            ->setFrom([\Yii::$app->params['supportEmail'] => 'GT myPerformance'])
+            ->setTo($manager->email)
+            ->setSubject($user->first_name . ' ' . $user->last_name . '  has completed the annual appraisal')
+            ->send();
+    }
+
+    public static function SubmitManager($id)
+    {
+        $manager = User::GetUserById(\Yii::$app->user->getId());
+        $user = User::GetUserById($id);
+
+        return \Yii::$app->mailer
+            ->compose([
+                'html' => 'submit_manager',
+                'text' => 'submit_manager'
+            ], [
+                'manager' => $manager,
+                'user' => $user,
+            ])
+            ->setFrom([\Yii::$app->params['supportEmail'] => 'GT myPerformance'])
+            ->setTo($user->email)
+            ->setSubject($manager->first_name . ' ' . $manager->last_name . '  has completed the annual appraisal')
             ->send();
     }
 }

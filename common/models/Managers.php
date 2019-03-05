@@ -55,7 +55,7 @@ class Managers extends \yii\db\ActiveRecord
                     'u.last_name',
                 ])
             ->from(self::tableName() . ' as m')
-            ->leftJoin(User::tableName() . ' u', 'u.id = m.user_id')
+            ->leftJoin(User::tableName() . ' u', 'u.id = m.manager_id')
             ->where(['m.user_id' => $id])
             ->all();
     }
