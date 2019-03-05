@@ -8,6 +8,8 @@ $this->registerJsFile('/js/common.js');
 $this->params['goals'] = true;
 
 $this->title = "Behavioral | " . $year;
+
+$readonly = !empty($development_state['status']) && $development_state['status'] == \common\models\UserDevelopmentState::STATUS_SUBMIT ? '' : 'readonly';
 ?>
 <div class="main-content">
     <section class="nav-tab">
@@ -41,7 +43,7 @@ $this->title = "Behavioral | " . $year;
                             </div>
                             <div class="common-item">
                                 <label>Manager’s comments</label>
-                                <textarea placeholder="Comment"
+                                <textarea placeholder="Comment" <?= $readonly ?>
                                           name="comments[<?= $k ?>][manager_comment]"><?= $beh['manager_comment'] ?></textarea>
                             </div>
                         </div>
@@ -49,7 +51,7 @@ $this->title = "Behavioral | " . $year;
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
-        <?php if (!empty($development_state['status'])): ?>
+        <?php if (!empty($development_state['status']) && $readonly == ''): ?>
             <div align="center" class="save-submit">
                 <button type="submit" class="long-btn"> Save changes</button>
             </div>

@@ -89,9 +89,7 @@ class DevelopmentController extends Controller
             if (!empty($comment['id'])) {
                 $model = ManagerDevelopment::findOne($comment['id']);
                 $model->manager_comment = $comment['manager_comment'];
-                if($model->save()){
-                    Helper::DDD($model->getErrors());
-                };
+                $model->save();
             } else {
                 $model = new ManagerDevelopment();
                 $model->user_id = $id;

@@ -4,6 +4,7 @@ $this->registerJsFile('/js/goals/content.js');
 $this->params['goals'] = true;
 $year = Yii::$app->request->get('year');
 $this->title = "Goals | " . $year;
+$readonly = !empty($development_state['status']) && $development_state['status'] == \common\models\UserDevelopmentState::STATUS_SUBMIT ? '' : 'readonly';
 ?>
 
 <div class="main-content">
@@ -51,7 +52,7 @@ $this->title = "Goals | " . $year;
                             <div class="common-item">
                                 <label>Manager’s comments</label>
                                 <input type="hidden" name="comments[<?= $k ?>][id]" value="<?= $goal['id'] ?>">
-                                <textarea placeholder="Comments"
+                                <textarea placeholder="Comments" <?= $readonly ?>
                                           name="comments[<?= $k ?>][manager_comment]"><?= $goal['manager_comments'] ?></textarea>
                             </div>
                         </div>
@@ -95,7 +96,7 @@ $this->title = "Goals | " . $year;
                 </div>
             <?php endif; ?>
         </div>
-        <?php if (!empty($development_state['status'])): ?>
+        <?php if (!empty($development_state['status']) && $readonly == ''): ?>
             <?php if (!empty($goals)): ?>
                 <div align="center" class="save-submit">
                     <button title="submit" form="form" class="long-btn"> Save changes</button>

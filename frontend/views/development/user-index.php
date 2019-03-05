@@ -8,6 +8,8 @@ $this->registerJsFile('/js/common.js');
 $this->params['goals'] = true;
 
 $this->title = "Development | " . $year;
+
+$readonly = !empty($development_state['status']) && $development_state['status'] == \common\models\UserDevelopmentState::STATUS_SUBMIT ? '' : 'readonly';
 ?>
 <div class="main-content">
     <section class="nav-tab">
@@ -38,7 +40,8 @@ $this->title = "Development | " . $year;
                 </div>
             <?php endif; ?>
             <div class="table-title flex"><img src="/html/assets/images/icons/team-members-feedback.png">Personal
-                development plan | assessment | <?= $user['first_name'] . ' ' . $user['last_name'] ?> | <?= $year ?></div>
+                development plan | assessment | <?= $user['first_name'] . ' ' . $user['last_name'] ?> | <?= $year ?>
+            </div>
             <div class="short-desc">
                 Review your past performance to identify your strengths and areas for development. Think about feedback
                 you have received regarding
@@ -69,13 +72,13 @@ $this->title = "Development | " . $year;
                 <div class="flex">
                     <div class="common-item">
                         <input type="hidden" name="comment[id]" value="<?= $manager['id'] ?>">
-                        <textarea placeholder="Comment"
+                        <textarea placeholder="Comment" <?= $readonly ?>
                                   name="comment[manager_comment]"><?= $manager['manager_comment'] ?></textarea>
                     </div>
                 </div>
             </div>
         </div>
-        <?php if (!empty($development_state['status']) && $development_state['status'] != \common\models\UserDevelopmentState::STATUS_MANAGER): ?>
+        <?php if (!empty($development_state['status']) && $readonly == ''): ?>
             <div align="center" class="save-submit">
                 <button type="submit" class="long-btn"> Save changes</button>
                 <a href="/development/submit-manager?year=<?= $year ?>&id=<?= $user['id'] ?>"

@@ -7,6 +7,7 @@ $this->registerJsFile('/js/common.js');
 //$this->params['goals'] = true;
 $year = Yii::$app->request->get('year');
 $this->title = "Impact | " . $year;
+$readonly = empty($development_state['status']) ? '' : 'readonly';
 ?>
 
 
@@ -44,12 +45,12 @@ $this->title = "Impact | " . $year;
                                 <input type="hidden"
                                        name="comments[<?= $k ?>][id]"
                                        value="<?= $impact['user_imp_id'] ?>">
-                                <textarea placeholder="Comment"
+                                <textarea placeholder="Comment" <?= $readonly ?>
                                           name="comments[<?= $k ?>][user_comment]"><?= $impact['user_comment'] ?></textarea>
                             </div>
                             <div class=" common-item">
                                 <label>Manager’s comments</label>
-                                <textarea readonly></textarea>
+                                <textarea readonly><?= $impact['manager_comment'] ?></textarea>
                             </div>
                         </div>
                     </div>

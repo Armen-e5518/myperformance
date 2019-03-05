@@ -6,6 +6,7 @@ $year = Yii::$app->request->get('year');
 $this->title = "Goals | " . $year;
 $k = 0;
 $class = 'hide';
+$readonly = empty($development_state['status']) ? '' : 'readonly';
 ?>
 
 <div class="main-content">
@@ -40,25 +41,25 @@ $class = 'hide';
                             <div class="common-item">
                                 <label>Goal description</label>
                                 <input type="hidden" name="goals[<?= $k ?>][id]" value="<?= $goal['id'] ?>">
-                                <textarea name="goals[<?= $k ?>][description]"><?= $goal['description'] ?></textarea>
+                                <textarea <?=$readonly?> name="goals[<?= $k ?>][description]"><?= $goal['description'] ?></textarea>
                             </div>
                             <div class="common-item">
                                 <label>Timeframe</label>
-                                <textarea name="goals[<?= $k ?>][timeframe]"><?= $goal['timeframe'] ?></textarea>
+                                <textarea <?=$readonly?> name="goals[<?= $k ?>][timeframe]"><?= $goal['timeframe'] ?></textarea>
                             </div>
                             <div class="common-item">
                                 <label>Measure of success</label>
-                                <textarea
+                                <textarea <?=$readonly?>
                                         name="goals[<?= $k ?>][measure_success]"><?= $goal['measure_success'] ?></textarea>
                             </div>
                             <div class="common-item">
                                 <label>Support needed</label>
-                                <textarea
+                                <textarea <?=$readonly?>
                                         name="goals[<?= $k ?>][support_needed]"><?= $goal['support_needed'] ?></textarea>
                             </div>
                             <div class="common-item">
                                 <label>My comments</label>
-                                <textarea name="goals[<?= $k ?>][my_comment]"><?= $goal['my_comment'] ?></textarea>
+                                <textarea <?=$readonly?> name="goals[<?= $k ?>][my_comment]"><?= $goal['my_comment'] ?></textarea>
                             </div>
                             <div class="common-item">
                                 <label>Manager’s comments</label>

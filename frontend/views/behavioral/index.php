@@ -8,6 +8,8 @@ $this->registerJsFile('/js/common.js');
 $this->params['goals'] = true;
 
 $this->title = "Behavioral | " . $year;
+
+$readonly = empty($development_state['status']) ? '' : 'readonly';
 ?>
 <div class="main-content">
     <section class="nav-tab">
@@ -39,7 +41,7 @@ $this->title = "Behavioral | " . $year;
                                 <input type="hidden" name="comments[<?= $k ?>][id]" value="<?= $beh['user_beh_id'] ?>">
                                 <input type="hidden" name="comments[<?= $k ?>][behavioral_id]"
                                        value="<?= $beh['id'] ?>">
-                                <textarea placeholder="Comment"
+                                <textarea placeholder="Comment" <?=$readonly?>
                                           name="comments[<?= $k ?>][user_comment]"><?= $beh['user_comment'] ?></textarea>
                             </div>
                             <div class="common-item">

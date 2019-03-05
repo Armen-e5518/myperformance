@@ -7,6 +7,7 @@ $this->registerJsFile('/js/common.js');
 //$this->params['goals'] = true;
 $year = Yii::$app->request->get('year');
 $this->title = "Impact | " . $year;
+$readonly = !empty($development_state['status']) && $development_state['status'] == \common\models\UserDevelopmentState::STATUS_SUBMIT ? '' : 'readonly';
 ?>
 
 
@@ -40,7 +41,7 @@ $this->title = "Impact | " . $year;
                             </div>
                             <div class=" common-item">
                                 <label>Manager’s comments</label>
-                                <textarea placeholder="Comment"
+                                <textarea placeholder="Comment" <?= $readonly ?>
                                           name="comments[<?= $k ?>][manager_comment]"><?= $impact['manager_comment'] ?></textarea>
                             </div>
                         </div>
@@ -48,7 +49,7 @@ $this->title = "Impact | " . $year;
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
-        <?php if (!empty($development_state['status'])): ?>
+        <?php if (!empty($development_state['status']) && $readonly == ''): ?>
             <div align="center" class="save-submit">
                 <button type="submit" class="long-btn"> Save changes</button>
             </div>
