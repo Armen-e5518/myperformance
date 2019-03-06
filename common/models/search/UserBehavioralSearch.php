@@ -19,7 +19,7 @@ class UserBehavioralSearch extends UserBehavioral
     {
         return [
             [['id', 'behavioral_id', 'user_id'], 'integer'],
-            [['user_comment', 'date'], 'safe'],
+            [['user_comment', 'date', 'manager_comment'], 'safe'],
         ];
     }
 
@@ -65,7 +65,8 @@ class UserBehavioralSearch extends UserBehavioral
             'date' => $this->date,
         ]);
 
-        $query->andFilterWhere(['like', 'user_comment', $this->user_comment]);
+        $query->andFilterWhere(['like', 'user_comment', $this->user_comment])
+            ->andFilterWhere(['like', 'manager_comment', $this->manager_comment]);
 
         return $dataProvider;
     }

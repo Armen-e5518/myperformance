@@ -12,20 +12,16 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="goals-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <p>
-        <?= Html::a('Create Goals', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Reset filter', ['index'], ['class' => 'btn btn-success']) ?>
     </p>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+//            'id',
             [
                 'attribute' => 'user_id',
 //                'format' => 'html',
@@ -43,9 +39,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'description',
-                'format' => 'html',
+                'format' => 'raw',
                 'value' => function ($data) {
-                    return '<textarea >' . $data->description . '</textarea>';
+                    return '<textarea readonly style="width: 100%" >' . $data->description . '</textarea>';
                 },
 
             ],
@@ -54,11 +50,23 @@ $this->params['breadcrumbs'][] = $this->title;
             //'timeframe:ntext',
             //'support_needed:ntext',
             //'manager_comments:ntext',
-            //'year',
+//            'year',
+            [
+                'attribute' => 'year',
+//
+                'filter' => \kartik\select2\Select2::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'year',
+                    'data' => \common\models\Years::GetAll(),
+                    'options' => [
+                        'placeholder' => 'Yeas...',
+                    ]
+                ]),
+            ],
             //'date',
             //'status',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{update}{delete}',]
         ],
     ]); ?>
 </div>

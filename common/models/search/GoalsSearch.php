@@ -3,6 +3,7 @@
 namespace common\models\search;
 
 use common\models\User;
+use common\models\Years;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -48,8 +49,10 @@ class GoalsSearch extends Goals
                 'g.*',
                 'u.first_name',
                 'u.last_name',
+                'y.year as year',
             ])
-            ->leftJoin(User::tableName() . ' u', 'u.id = g.user_id');
+            ->leftJoin(User::tableName() . ' u', 'u.id = g.user_id')
+            ->leftJoin(Years::tableName() . ' y', 'y.id = g.year');
 
         // add conditions that should always apply here
 
@@ -69,9 +72,9 @@ class GoalsSearch extends Goals
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'year' => $this->year,
-            'date' => $this->date,
-            'status' => $this->status,
+            'g.year' => $this->year,
+//            'date' => $this->date,
+//            'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'description', $this->description])

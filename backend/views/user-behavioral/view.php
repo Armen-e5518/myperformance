@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'user_id',
             'user_comment:ntext',
             'date',
+            'manager_comment:ntext',
         ],
     ]) ?>
 
