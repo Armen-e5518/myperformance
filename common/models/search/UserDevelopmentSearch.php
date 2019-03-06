@@ -2,16 +2,15 @@
 
 namespace common\models\search;
 
-use common\models\User;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Goals;
+use common\models\UserDevelopment;
 
 /**
- * GoalsSearch represents the model behind the search form of `common\models\Goals`.
+ * UserDevelopmentSearch represents the model behind the search form of `common\models\UserDevelopment`.
  */
-class GoalsSearch extends Goals
+class UserDevelopmentSearch extends UserDevelopment
 {
     /**
      * {@inheritdoc}
@@ -19,8 +18,8 @@ class GoalsSearch extends Goals
     public function rules()
     {
         return [
-            [['id', 'user_id', 'year', 'status'], 'integer'],
-            [['description', 'my_comment', 'measure_success', 'timeframe', 'support_needed', 'manager_comments', 'date'], 'safe'],
+            [['id', 'user_id', 'development_id', 'year'], 'integer'],
+            [['user_comment'], 'safe'],
         ];
     }
 
@@ -42,14 +41,7 @@ class GoalsSearch extends Goals
      */
     public function search($params)
     {
-        $query = Goals::find()
-            ->from(Goals::tableName() . ' g')
-            ->select([
-                'g.*',
-                'u.first_name',
-                'u.last_name',
-            ])
-            ->leftJoin(User::tableName() . ' u', 'u.id = g.user_id');
+        $query = UserDevelopment::find();
 
         // add conditions that should always apply here
 
@@ -69,17 +61,11 @@ class GoalsSearch extends Goals
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
+            'development_id' => $this->development_id,
             'year' => $this->year,
-            'date' => $this->date,
-            'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'my_comment', $this->my_comment])
-            ->andFilterWhere(['like', 'measure_success', $this->measure_success])
-            ->andFilterWhere(['like', 'timeframe', $this->timeframe])
-            ->andFilterWhere(['like', 'support_needed', $this->support_needed])
-            ->andFilterWhere(['like', 'manager_comments', $this->manager_comments]);
+        $query->andFilterWhere(['like', 'user_comment', $this->user_comment]);
 
         return $dataProvider;
     }

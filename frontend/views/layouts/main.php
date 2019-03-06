@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -42,16 +43,19 @@ AppAsset::register($this);
         </div>
         <div class="user-options flex">
             <div class="nav-menu">
-<!--                <a href="mailto:name@email.com">Link text</a>-->
+                <!--                <a href="mailto:name@email.com">Link text</a>-->
                 <a href="mailto:gtmyperformance@gmail.com" class="transition relative">Contact us</a>
-            </div >
+            </div>
             <div class="menu-block">
-                <a href="javascript:void(0);"  class="flex drop-down">
-                    <img src="/users/<?=Yii::$app->user->identity->avatar?>" alt="">
+                <a href="javascript:void(0);" class="flex drop-down">
+                    <img src="/users/<?= Yii::$app->user->identity->avatar ?>" alt="">
                     <span class="inline-block"><?= \frontend\models\User::getCurrentUserName() ?></span>
                     <i class="fas fa-angle-down"></i>
                 </a>
-                <a data-method="post"  class="logout hide" href="/site/logout">Logout</a>
+                <div class="menu-block-body hide">
+                    <a class="profile menu-item" href="/user/index">Profile</a>
+                    <a data-method="post" class="logout menu-item" href="/site/logout">Logout</a>
+                </div>
             </div>
 
         </div>

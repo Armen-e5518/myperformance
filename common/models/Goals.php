@@ -25,6 +25,9 @@ class Goals extends \yii\db\ActiveRecord
     const STATUS_SUBMIT_USER = 2;
     const STATUS_SUBMIT_MANAGER = 3;
 
+    public $last_name;
+    public $first_name;
+
     /**
      * {@inheritdoc}
      */

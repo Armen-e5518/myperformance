@@ -14,13 +14,23 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'user_id')->textInput() ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'user_comment')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'my_comment')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'measure_success')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'timeframe')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'support_needed')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'manager_comments')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'year')->textInput() ?>
 
     <?= $form->field($model, 'date')->textInput() ?>
+
+    <?= $form->field($model, 'status')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

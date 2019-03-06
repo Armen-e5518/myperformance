@@ -31,9 +31,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'user_id',
             'manager_id',
-            'notes',
+            'notes:ntext',
             'attachment',
             'date',
+            'status',
+            'year',
         ],
     ]) ?>
 

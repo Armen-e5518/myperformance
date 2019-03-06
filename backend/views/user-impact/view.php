@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Goals */
+/* @var $model common\models\UserImpact */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Goals', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'User Impacts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="goals-view">
+<div class="user-impact-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,16 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
+            'impact_id',
             'user_id',
-            'description:ntext',
-            'my_comment:ntext',
-            'measure_success:ntext',
-            'timeframe:ntext',
-            'support_needed:ntext',
-            'manager_comments:ntext',
-            'year',
+            'user_comment:ntext',
             'date',
-            'status',
+            'manager_comment:ntext',
         ],
     ]) ?>
 

@@ -2,16 +2,15 @@
 
 namespace common\models\search;
 
-use common\models\User;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Goals;
+use common\models\Goals as GoalsModel;
 
 /**
- * GoalsSearch represents the model behind the search form of `common\models\Goals`.
+ * Goals represents the model behind the search form of `common\models\Goals`.
  */
-class GoalsSearch extends Goals
+class Goals extends GoalsModel
 {
     /**
      * {@inheritdoc}
@@ -42,14 +41,7 @@ class GoalsSearch extends Goals
      */
     public function search($params)
     {
-        $query = Goals::find()
-            ->from(Goals::tableName() . ' g')
-            ->select([
-                'g.*',
-                'u.first_name',
-                'u.last_name',
-            ])
-            ->leftJoin(User::tableName() . ' u', 'u.id = g.user_id');
+        $query = GoalsModel::find();
 
         // add conditions that should always apply here
 

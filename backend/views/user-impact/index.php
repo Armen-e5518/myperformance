@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\search\Conversations */
+/* @var $searchModel common\models\search\UserImpact */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Conversations';
+$this->title = 'User Impacts';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="conversations-index">
+<div class="user-impact-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Conversations', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create User Impact', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,13 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
+            'impact_id',
             'user_id',
-            'manager_id',
-            'notes:ntext',
-            'attachment',
-            //'date',
-            //'status',
-            //'year',
+            'user_comment:ntext',
+            'date',
+            //'manager_comment:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

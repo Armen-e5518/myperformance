@@ -26,11 +26,37 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'user_id',
-            'title',
-            'description:ntext',
-            'user_comment:ntext',
+            [
+                'attribute' => 'user_id',
+//                'format' => 'html',
+                'value' => function ($data) {
+                    return $data->first_name . ' ' . $data->last_name;
+                },
+                'filter' => \kartik\select2\Select2::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'user_id',
+                    'data' => \backend\models\User::GetAllUsersIndex(),
+                    'options' => [
+                        'placeholder' => 'Users...',
+                    ]
+                ]),
+            ],
+            [
+                'attribute' => 'description',
+                'format' => 'html',
+                'value' => function ($data) {
+                    return '<textarea >' . $data->description . '</textarea>';
+                },
+
+            ],
+//            'my_comment:ntext',
+//            'measure_success:ntext',
+            //'timeframe:ntext',
+            //'support_needed:ntext',
+            //'manager_comments:ntext',
+            //'year',
             //'date',
+            //'status',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -3,14 +3,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Goals */
+/* @var $model common\models\UserImpact */
 
-$this->title = 'Update Goals: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Goals', 'url' => ['index']];
+$this->title = 'Update User Impact: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'User Impacts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="goals-update">
+<div class="user-impact-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

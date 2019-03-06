@@ -12,11 +12,11 @@ $(document).ready(function () {
     });
 
     $('.drop-down').click(function (e) {
-        $('.logout').toggleClass('hide')
+        $('.menu-block-body').toggleClass('hide')
         e.stopPropagation()
     })
     $('body').click(function (e) {
-        $('.logout').addClass('hide')
+        $('.menu-block-body').addClass('hide')
     })
 
     $(document).on('change', '#Reason', function () {
