@@ -41,7 +41,18 @@ class UserImpact extends UserImpactModel
      */
     public function search($params)
     {
-        $query = UserImpactModel::find();
+        $query = UserImpactModel::find()
+            ->from(UserBehavioral::tableName() . ' ub')
+            ->select([
+                'ub.*',
+                'u.first_name',
+                'u.last_name',
+                'y.year as year',
+                'b.title as title',
+            ])
+            ->leftJoin(User::tableName() . ' u', 'u.id = ub.user_id')
+            ->leftJoin(Behavioral::tableName() . ' b', 'b.id = ub.behavioral_id')
+            ->leftJoin(Years::tableName() . ' y', 'y.id = b.year');
 
         // add conditions that should always apply here
 

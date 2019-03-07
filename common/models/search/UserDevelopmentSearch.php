@@ -2,6 +2,9 @@
 
 namespace common\models\search;
 
+use common\models\Development;
+use common\models\User;
+use common\models\Years;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -41,7 +44,18 @@ class UserDevelopmentSearch extends UserDevelopment
      */
     public function search($params)
     {
-        $query = UserDevelopment::find();
+        $query = UserDevelopment::find()
+            ->from(UserDevelopment::tableName() . ' ud')
+            ->select([
+                'ud.*',
+                'u.first_name',
+                'u.last_name',
+                'y.year as year',
+                'd.title as title',
+            ])
+            ->leftJoin(User::tableName() . ' u', 'u.id = ud.user_id')
+            ->leftJoin(Development::tableName() . ' d', 'd.id = ud.development_id')
+            ->leftJoin(Years::tableName() . ' y', 'y.id = ud.year');
 
         // add conditions that should always apply here
 
@@ -62,7 +76,7 @@ class UserDevelopmentSearch extends UserDevelopment
             'id' => $this->id,
             'user_id' => $this->user_id,
             'development_id' => $this->development_id,
-            'year' => $this->year,
+            'ud.year' => $this->year,
         ]);
 
         $query->andFilterWhere(['like', 'user_comment', $this->user_comment]);

@@ -10,12 +10,19 @@ use Yii;
  * @property int $id
  * @property int $behavioral_id
  * @property int $user_id
+ * @property int $manager_id
  * @property string $user_comment
  * @property string $date
  * @property string $manager_comment
+ * @property string $year
  */
 class UserBehavioral extends \yii\db\ActiveRecord
 {
+    public $last_name;
+    public $first_name;
+    public $title;
+    public $year;
+
     /**
      * {@inheritdoc}
      */
@@ -30,7 +37,7 @@ class UserBehavioral extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['behavioral_id', 'user_id'], 'integer'],
+            [['behavioral_id', 'user_id', 'manager_id'], 'integer'],
             [['user_comment', 'manager_comment'], 'string'],
             [['date'], 'safe'],
         ];
@@ -43,11 +50,12 @@ class UserBehavioral extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'behavioral_id' => 'Behavioral ID',
-            'user_id' => 'User ID',
+            'behavioral_id' => 'Behavioral',
+            'user_id' => 'User ',
+            'manager_id' => 'Manager ',
             'user_comment' => 'User Comment',
             'date' => 'Date',
-            'manager_comment' => 'manager_comment',
+            'manager_comment' => 'Manager comment',
         ];
     }
 

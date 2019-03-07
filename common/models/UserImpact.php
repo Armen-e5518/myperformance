@@ -10,12 +10,18 @@ use Yii;
  * @property int $id
  * @property int $impact_id
  * @property int $user_id
+ * @property int $manager_id
  * @property string $user_comment
  * @property string $date
  * @property string $manager_comment
+ * @property string $year
  */
 class UserImpact extends \yii\db\ActiveRecord
 {
+    public $last_name;
+    public $first_name;
+    public $title;
+    public $year;
     /**
      * {@inheritdoc}
      */
@@ -30,7 +36,7 @@ class UserImpact extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['impact_id', 'user_id'], 'integer'],
+            [['impact_id', 'user_id','manager_id'], 'integer'],
             [['user_comment','manager_comment'], 'string'],
             [['date'], 'safe'],
         ];
@@ -43,11 +49,12 @@ class UserImpact extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'impact_id' => 'impact ID',
-            'user_id' => 'User ID',
-            'user_comment' => 'User Comment',
+            'impact_id' => 'Impact',
+            'user_id' => 'User',
+            'user_comment' => 'User comment',
             'date' => 'Date',
-            'manager_comment' => 'manager_comment',
+            'manager_comment' => 'Manager comment',
+            'manager_id' => 'Manager',
         ];
     }
 

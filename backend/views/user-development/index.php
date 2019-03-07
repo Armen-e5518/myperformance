@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\search\UserImpactSearch */
+/* @var $searchModel common\models\search\UserDevelopmentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'User impacts';
+$this->title = 'User Developments';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-impact-index">
+<div class="user-development-index">
 
     <p>
         <?= Html::a('Reset filter', ['index'], ['class' => 'btn btn-success']) ?>
@@ -23,11 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
 //            'id',
-//            'impact_id',
 //            'user_id',
+//            'development_id',
 //            'user_comment:ntext',
-//            'date',
-            //'manager_comment:ntext',
+//            'year',
 
             [
                 'attribute' => 'user_id',
@@ -45,17 +44,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]),
             ],
             [
-                'attribute' => 'impact_id',
+                'attribute' => 'development_id',
                 'format' => 'raw',
                 'value' => function ($data) {
                     return  $data->title ;
                 },
                 'filter' => \kartik\select2\Select2::widget([
                     'model' => $searchModel,
-                    'attribute' => 'impact_id',
-                    'data' => \common\models\Impact::GetAllIndex(),
+                    'attribute' => 'development_id',
+                    'data' => \common\models\Development::GetAllIndex(),
                     'options' => [
-                        'placeholder' => 'Impacts...',
+                        'placeholder' => 'Development...',
                     ]
                 ]),
 
@@ -69,14 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
 
             ],
-            [
-                'attribute' => 'manager_comment',
-                'format' => 'raw',
-                'value' => function ($data) {
-                    return '<textarea readonly style="width: 100%" >' . $data->manager_comment . '</textarea>';
-                },
 
-            ],
             [
                 'attribute' => 'year',
                 'filter' => \kartik\select2\Select2::widget([
@@ -88,6 +80,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]
                 ]),
             ],
+//            'date',
+            //'manager_comment:ntext',
+
             ['class' => 'yii\grid\ActionColumn', 'template' => '{update}{delete}',]
         ],
     ]); ?>

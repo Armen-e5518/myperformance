@@ -73,6 +73,10 @@ class Impact extends \yii\db\ActiveRecord
             return false;
         }
     }
+    public static function GetAllIndex()
+    {
+        return self::find()->select(['title', 'id'])->indexBy('id')->column();
+    }
 
     public static function GetAll($year)
     {

@@ -47,6 +47,10 @@ class Development extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function GetAllIndex()
+    {
+        return self::find()->select(['title', 'id'])->indexBy('id')->column();
+    }
     public static function GetAllByUserIdByYear($year, $id)
     {
         return (new \yii\db\Query())

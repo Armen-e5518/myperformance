@@ -76,6 +76,11 @@ class Behavioral extends \yii\db\ActiveRecord
         }
     }
 
+    public static function GetAllIndex()
+    {
+        return self::find()->select(['title', 'id'])->indexBy('id')->column();
+    }
+
     public static function GetAll($year)
     {
         return self::find()->asArray()->where(['year' => Years::GetYearIdByYear($year)])->all();
@@ -97,7 +102,8 @@ class Behavioral extends \yii\db\ActiveRecord
             ->all();
 
     }
-    public static function GetAllbyUserByYear($year,$id)
+
+    public static function GetAllbyUserByYear($year, $id)
     {
         return (new \yii\db\Query())
             ->select(

@@ -25,7 +25,10 @@ class Conversations extends \yii\db\ActiveRecord
     const STATUS_DELETED_USER = 2;
     const STATUS_DELETED_MANAGER = 3;
 
-
+    public $last_name;
+    public $first_name;
+    public $m_last_name;
+    public $m_first_name;
     /**
      * @var UploadedFile
      */
@@ -63,8 +66,8 @@ class Conversations extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'manager_id' => 'Manager ID',
+            'user_id' => 'User',
+            'manager_id' => 'Manager',
             'notes' => 'Notes',
             'attachment' => 'Attachment',
             'date' => 'Date',

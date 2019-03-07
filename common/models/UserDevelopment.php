@@ -11,10 +11,14 @@ use Yii;
  * @property int $user_id
  * @property int $development_id
  * @property string $user_comment
- * @property string $year
+// * @property string $year
  */
 class UserDevelopment extends \yii\db\ActiveRecord
 {
+    public $last_name;
+    public $first_name;
+    public $title;
+//    public $year;
     /**
      * {@inheritdoc}
      */
@@ -41,9 +45,9 @@ class UserDevelopment extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'development_id' => 'Development ID',
-            'user_comment' => 'User Comment',
+            'user_id' => 'User ',
+            'development_id' => 'Development',
+            'user_comment' => 'User comment',
             'year' => 'Year',
         ];
     }

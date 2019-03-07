@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\UserImpact;
-use common\models\search\UserImpact as UserImpactSearch;
+use common\models\search\UserImpactSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

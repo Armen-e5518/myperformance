@@ -2,6 +2,9 @@
 
 namespace common\models\search;
 
+use common\models\Behavioral;
+use common\models\User;
+use common\models\Years;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -18,7 +21,7 @@ class UserBehavioralSearch extends UserBehavioral
     public function rules()
     {
         return [
-            [['id', 'behavioral_id', 'user_id'], 'integer'],
+            [['id', 'behavioral_id', 'user_id','year'], 'integer'],
             [['user_comment', 'date', 'manager_comment'], 'safe'],
         ];
     }
@@ -41,7 +44,18 @@ class UserBehavioralSearch extends UserBehavioral
      */
     public function search($params)
     {
-        $query = UserBehavioral::find();
+        $query = UserBehavioral::find()
+            ->from(UserBehavioral::tableName() . ' ub')
+            ->select([
+                'ub.*',
+                'u.first_name',
+                'u.last_name',
+                'y.year as year',
+                'b.title as title',
+            ])
+            ->leftJoin(User::tableName() . ' u', 'u.id = ub.user_id')
+            ->leftJoin(Behavioral::tableName() . ' b', 'b.id = ub.behavioral_id')
+            ->leftJoin(Years::tableName() . ' y', 'y.id = b.year');
 
         // add conditions that should always apply here
 
@@ -63,6 +77,7 @@ class UserBehavioralSearch extends UserBehavioral
             'behavioral_id' => $this->behavioral_id,
             'user_id' => $this->user_id,
             'date' => $this->date,
+            'b.year' => $this->year,
         ]);
 
         $query->andFilterWhere(['like', 'user_comment', $this->user_comment])

@@ -81,6 +81,7 @@ class BehavioralController extends Controller
                 if (!empty($comment['id'])) {
                     $model = UserBehavioral::findOne($comment['id']);
                     $model->manager_comment = $comment['manager_comment'];
+                    $model->manager_id = Yii::$app->user->getId();
                     $model->save();
                 }
             }

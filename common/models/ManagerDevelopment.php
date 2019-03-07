@@ -48,8 +48,11 @@ class ManagerDevelopment extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function GetOneByUserIdByManagerId($user_id, $manager_id, $year)
+    public static function GetOneByUserIdByManagerId($user_id, $development_state, $year)
     {
-        return self::findOne(['user_id' => $user_id, 'manager_id' => $manager_id, 'year' => Years::GetYearIdByYear($year)]);
+        if (!empty($development_state)) {
+            return self::findOne(['user_id' => $user_id, 'manager_id' => $development_state['manager_id'], 'year' => Years::GetYearIdByYear($year)]);
+        }
+        return null;
     }
 }

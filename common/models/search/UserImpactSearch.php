@@ -2,17 +2,18 @@
 
 namespace common\models\search;
 
+use common\models\Impact;
 use common\models\User;
 use common\models\Years;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Conversations;
+use common\models\UserImpact;
 
 /**
- * ConversationsSearch represents the model behind the search form of `common\models\Conversations`.
+ * UserImpactSearch represents the model behind the search form of `common\models\UserImpact`.
  */
-class ConversationsSearch extends Conversations
+class UserImpactSearch extends UserImpact
 {
     /**
      * {@inheritdoc}
@@ -20,8 +21,8 @@ class ConversationsSearch extends Conversations
     public function rules()
     {
         return [
-            [['id', 'user_id', 'manager_id', 'status', 'year'], 'integer'],
-            [['notes', 'attachment', 'date'], 'safe'],
+            [['id', 'impact_id', 'user_id','year'], 'integer'],
+            [['user_comment', 'date', 'manager_comment'], 'safe'],
         ];
     }
 
@@ -43,19 +44,18 @@ class ConversationsSearch extends Conversations
      */
     public function search($params)
     {
-        $query = Conversations::find()
-            ->from(Conversations::tableName() . ' c')
+        $query = UserImpact::find()
+            ->from(UserImpact::tableName() . ' ui')
             ->select([
-                'c.*',
+                'ui.*',
                 'u.first_name',
                 'u.last_name',
-                'm.first_name as m_first_name',
                 'y.year as year',
-                'm.last_name as m_last_name',
+                'i.title as title',
             ])
-            ->leftJoin(User::tableName() . ' u', 'u.id = c.user_id')
-            ->leftJoin(Years::tableName() . ' y', 'y.id = c.year')
-            ->leftJoin(User::tableName() . ' m', 'm.id = c.manager_id');
+            ->leftJoin(User::tableName() . ' u', 'u.id = ui.user_id')
+            ->leftJoin(Impact::tableName() . ' i', 'i.id = ui.impact_id')
+            ->leftJoin(Years::tableName() . ' y', 'y.id = i.year');
 
         // add conditions that should always apply here
 
@@ -74,15 +74,14 @@ class ConversationsSearch extends Conversations
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'impact_id' => $this->impact_id,
             'user_id' => $this->user_id,
-            'c.manager_id' => $this->manager_id,
             'date' => $this->date,
-            'status' => $this->status,
-            'c.year' => $this->year,
+            'i.year' => $this->year,
         ]);
 
-        $query->andFilterWhere(['like', 'notes', $this->notes])
-            ->andFilterWhere(['like', 'attachment', $this->attachment]);
+        $query->andFilterWhere(['like', 'user_comment', $this->user_comment])
+            ->andFilterWhere(['like', 'manager_comment', $this->manager_comment]);
 
         return $dataProvider;
     }

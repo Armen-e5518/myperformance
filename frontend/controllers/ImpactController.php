@@ -77,6 +77,7 @@ class ImpactController extends Controller
                 if (!empty($comment['id'])) {
                     $model = UserImpact::findOne($comment['id']);
                     $model->manager_comment = $comment['manager_comment'];
+                    $model->manager_id = Yii::$app->user->getId();
                     $model->save();
                 }
             }

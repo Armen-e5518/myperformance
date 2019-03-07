@@ -74,11 +74,12 @@ class DevelopmentController extends Controller
             }
             return $this->redirect(['annual/' . $year]);
         }
+        $development_state = UserDevelopmentState::findOne(['user_id' => $user_id, 'year' => $year]);
         return $this->render('index', [
             'year' => $year,
-            'development_state' => UserDevelopmentState::findOne(['user_id' => $user_id, 'year' => $year]),
+            'development_state' => $development_state,
             'developments' => Development::GetAllByUserIdByYear($year, $user_id),
-            'manager' => ManagerDevelopment::GetOneByUserIdByManagerId($user_id, Yii::$app->user->identity->manager_id, $year)
+            'manager' => ManagerDevelopment::GetOneByUserIdByManagerId($user_id, $development_state, $year)
         ]);
     }
 
@@ -100,12 +101,13 @@ class DevelopmentController extends Controller
             }
             return $this->redirect(['annual/' . $year]);
         }
+        $development_state = UserDevelopmentState::findOne(['user_id' => $id, 'year' => $year]);
         return $this->render('user-index', [
             'year' => $year,
             'user' => User::findOne($id),
-            'developments' => Development::GetAllByUserIdByYear($year, $id),
+            'developments' => $development_state,
             'development_state' => UserDevelopmentState::findOne(['user_id' => $id, 'year' => $year, 'manager_id' => Yii::$app->user->getId()]),
-            'manager' => ManagerDevelopment::GetOneByUserIdByManagerId($id, Yii::$app->user->getId(), $year)
+            'manager' => ManagerDevelopment::GetOneByUserIdByManagerId($id, $development_state, $year)
         ]);
     }
 
