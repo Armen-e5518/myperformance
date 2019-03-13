@@ -58,6 +58,7 @@ return [
                 'give-feedback/<year:\d+>/<id:\d+>' => 'feedback/give-feedback',
                 'view-feedback/<year:\d+>/<id:\d+>' => 'feedback/view-feedback',
                 'open-feedback/<year:\d+>/<id:\d+>' => 'open-feedback',
+                'pdf/<year:\d+>/<id:\d+>' => 'feedback/pdf',
             ],
         ],
 

@@ -2,20 +2,17 @@
 
 namespace frontend\controllers;
 
-use backend\components\Helper;
 use backend\models\User;
 use common\models\Development;
 use common\models\ManagerDevelopment;
-use common\models\UserBehavioral;
 use common\models\UserDevelopment;
 use common\models\UserDevelopmentState;
 use common\models\Years;
 use frontend\components\Check;
 use frontend\components\Mail;
 use Yii;
-use common\models\Behavioral;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
+use yii\web\Controller;
 
 /**
  * BehavioralController implements the CRUD actions for Behavioral model.
@@ -105,8 +102,8 @@ class DevelopmentController extends Controller
         return $this->render('user-index', [
             'year' => $year,
             'user' => User::findOne($id),
-            'developments' => $development_state,
-            'development_state' => UserDevelopmentState::findOne(['user_id' => $id, 'year' => $year, 'manager_id' => Yii::$app->user->getId()]),
+            'developments' => Development::GetAllByUserIdByYear($year, $id),
+            'development_state' => $development_state,
             'manager' => ManagerDevelopment::GetOneByUserIdByManagerId($id, $development_state, $year)
         ]);
     }

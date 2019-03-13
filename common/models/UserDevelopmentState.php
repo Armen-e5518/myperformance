@@ -18,6 +18,8 @@ class UserDevelopmentState extends \yii\db\ActiveRecord
     const STATUS_SUBMIT = 1;
     const STATUS_MANAGER = 2;
 
+    public $last_name;
+    public $first_name;
     /**
      * {@inheritdoc}
      */
@@ -43,7 +45,7 @@ class UserDevelopmentState extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
+            'user_id' => 'User',
             'year' => 'Year',
             'status' => 'Status',
             'manager_id' => 'manager_id',

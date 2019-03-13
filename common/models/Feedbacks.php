@@ -131,6 +131,11 @@ class Feedbacks extends \yii\db\ActiveRecord
         ];
     }
 
+    public function GetPdfImage($item, $value)
+    {
+        return $this->$item == $value ? '<img src="/images/radio_selected.png" alt="">' : '<img src="/images/radio.png" alt="">';
+    }
+
     function saveNewInternal($year)
     {
         $this->type = self::TYPE_INTERNAL;

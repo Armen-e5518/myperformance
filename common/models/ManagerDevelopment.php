@@ -2,8 +2,6 @@
 
 namespace common\models;
 
-use Yii;
-
 /**
  * This is the model class for table "manager_development".
  *
@@ -54,5 +52,10 @@ class ManagerDevelopment extends \yii\db\ActiveRecord
             return self::findOne(['user_id' => $user_id, 'manager_id' => $development_state['manager_id'], 'year' => Years::GetYearIdByYear($year)]);
         }
         return null;
+    }
+
+    public static function GetOneByUserIdByManagerIdForCheck($user_id, $manager_id, $year)
+    {
+        return self::findOne(['user_id' => $user_id, 'manager_id' => $manager_id, 'year' => Years::GetYearIdByYear($year)]);
     }
 }

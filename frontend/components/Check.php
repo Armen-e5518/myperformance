@@ -57,6 +57,8 @@ class Check extends Component
         $behavioral = Behavioral::GetAllbyUserByYear($year, $id);
         foreach ($behavioral as $item) {
             if (empty($item['manager_comment'])) {
+//                echo 'BehavioralManager';
+//                die;
                 return false;
             }
         }
@@ -79,6 +81,8 @@ class Check extends Component
         $date = Impact::GetAllByUserIdByYear($year, $id);
         foreach ($date as $item) {
             if (empty($item['manager_comment'])) {
+//                echo 'ImpactManager';
+//                die;
                 return false;
             }
         }
@@ -99,7 +103,7 @@ class Check extends Component
 
     public static function DevelopmentManager($year, $id)
     {
-        $date = ManagerDevelopment::GetOneByUserIdByManagerId($id, \Yii::$app->user->getId(), $year);
+        $date = ManagerDevelopment::GetOneByUserIdByManagerIdForCheck($id, \Yii::$app->user->getId(), $year);
         if (empty($date['manager_comment'])) {
             return false;
         }

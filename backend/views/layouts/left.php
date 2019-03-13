@@ -20,6 +20,7 @@
                     ['label' => 'User behavioral', 'icon' => 'handshake-o', 'url' => ['/user-behavioral']],
                     ['label' => 'User impact', 'icon' => 'umbrella', 'url' => ['/user-impact']],
                     ['label' => 'User development', 'icon' => 'bar-chart', 'url' => ['/user-development']],
+                    ['label' => 'User development state', 'icon' => 'bar-chart', 'url' => ['/user-development-state']],
 //                    ['label' => 'Goals feedback', 'icon' => 'file-code-o', 'url' => ['/goals-feedback']],
                 ],
             ]

@@ -117,25 +117,13 @@ $this->title = "Feedback | " . $year;
                     </div>
                     <div class="common-item">
                         <div class="radio-list">
-                            <label>
-                                <input type="radio" name="Feedbacks[collaboration]" value="0"><span></span><em>Strongly
-                                    Agree </em>
-                            </label>
-                            <label>
-                                <input type="radio" name="Feedbacks[collaboration]"
-                                       value="1"><span></span><em>Agree</em></label>
-                            <label>
-                                <input type="radio" name="Feedbacks[collaboration]"
-                                       value="Neutral"><span></span><em>Neutral </em></label>
-                            <label>
-                                <input type="radio" name="Feedbacks[collaboration]" value="2"><span></span>
-                                <em>Disagree </em></label>
-                            <label>
-                                <input type="radio" name="Feedbacks[collaboration]" value="3"><span></span><em> Strongly
-                                    Disagree</em> </label>
+                            <label><input type="radio" name="Feedbacks[collaboration]" value="0"><span></span><em>Strongly Agree</em></label>
+                            <label><input type="radio" name="Feedbacks[collaboration]" value="1"><span></span><em>Agree</em></label>
+                            <label><input type="radio" name="Feedbacks[collaboration]" value="2"><span></span><em>Neutral</em></label>
+                            <label><input type="radio" name="Feedbacks[collaboration]" value="3"><span></span><em>Disagree</em></label>
+                            <label><input type="radio" name="Feedbacks[collaboration]" value="4"><span></span><em>Strongly Disagree</em></label>
                         </div>
-                        <textarea placeholder="Write your comments here"
-                                  name="Feedbacks[collaboration_text]"></textarea>
+                        <textarea placeholder="Write your comments here" name="Feedbacks[collaboration_text]"></textarea>
                     </div>
                     <div class="line"></div>
                     <div class="common-item flex">
