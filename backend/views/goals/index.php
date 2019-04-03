@@ -45,6 +45,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
 
             ],
+            [
+                'attribute' => 'manager_comments',
+                'format' => 'raw',
+                'value' => function ($data) {
+                    return '<textarea readonly style="width: 100%" >' . $data->manager_comments . '</textarea>';
+                },
+
+            ],
 //            'my_comment:ntext',
 //            'measure_success:ntext',
             //'timeframe:ntext',
@@ -66,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'date',
             //'status',
 
-            ['class' => 'yii\grid\ActionColumn', 'template' => '{update}{delete}',]
+           ['class' => 'yii\grid\ActionColumn', 'template' => $searchModel->getTemplate(),],
         ],
     ]); ?>
 </div>

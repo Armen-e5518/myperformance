@@ -2,20 +2,15 @@
 
 namespace frontend\controllers;
 
-use backend\components\Helper;
 use backend\models\User;
 use common\models\Conversations;
-use common\models\GoalsFeedback;
-use common\models\ImpactFeedback;
 use common\models\Years;
 use frontend\components\Calendar;
 use frontend\components\Mail;
+use kartik\mpdf\Pdf;
 use Yii;
-use common\models\BehavioralFeedback;
-use common\models\search\BehavioralFeedbackSearch;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Controller;
 use yii\web\UploadedFile;
 
 /**
@@ -70,7 +65,7 @@ class ConversationsController extends Controller
         if (Yii::$app->request->post() && $model->load(Yii::$app->request->post()) && $model->save()) {
             if ($id) {
                 Mail::SessionUpdated($model, $year);
-            }else{
+            } else {
                 Calendar::CreateFile($model->date);
                 Mail::NewSession($model, $year);
             }
@@ -110,4 +105,43 @@ class ConversationsController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionPdf($year)
+    {
+        $this->layout = false;
+        $content = $this->renderPartial('pdf-content', [
+            'received' => Conversations::GetReceivedConversations($year),
+            'provided' => Conversations::GetProvidedConversations($year),
+            'year' => $year
+        ]);
+        $pdf = new Pdf([
+// set to use core fonts only
+            'mode' => Pdf::MODE_CORE,
+// A4 paper format
+            'format' => Pdf::FORMAT_A4,
+// portrait orientation
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+// stream to browser inline
+            'destination' => Pdf::DEST_BROWSER,
+// your html content input
+            'content' => $content,
+// format content from your own css file if needed or use the
+//             enhanced bootstrap css built by Krajee for mPDF formatting
+//            'cssFile' => '@web/css/pdf-css.css',
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+            // any css to be embedded if required
+//            'cssInline' => '.kv-heading-1{font-size:18px}',
+// set mPDF properties on the fly
+            'options' => ['title' => 'MyPerformance ' . date('YY-MM-DD')],
+// call mPDF methods on the fly
+            'methods' => [
+                'SetHeader' => ['MyPerformance ' . date('Y-m-d')],
+                'SetFooter' => ['MyPerformance | {PAGENO} |'],
+            ]
+        ]);
+//        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+//        $headers = Yii::$app->response->headers;
+//        $headers->add('Content-Type', 'application/pdf');
+        // return the pdf output as per the destination setting
+        return $pdf->render();
+    }
 }

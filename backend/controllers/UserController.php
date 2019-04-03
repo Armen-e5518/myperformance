@@ -124,7 +124,7 @@ class UserController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->UpdateUser($id);
-            return $this->redirect(['index']);
+            return $this->redirect(['create']);
         }
         return $this->render('update', [
             'model' => $model,

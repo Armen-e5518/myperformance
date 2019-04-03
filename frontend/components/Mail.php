@@ -213,4 +213,21 @@ class Mail extends Component
             ->setSubject($manager->first_name . ' ' . $manager->last_name . '  has completed the annual appraisal')
             ->send();
     }
+
+    public static function SandMailTo($model)
+    {
+        return \Yii::$app->mailer
+            ->compose(
+                [
+                    'html' => 'mail_to',
+                    'text' => 'submit_manager'
+                ],
+                [
+                    'model' => $model,
+                ])
+            ->setFrom([\Yii::$app->params['supportEmail'] => 'GT myPerformance'])
+            ->setTo($model->email)
+            ->setSubject($model->subject)
+            ->send();
+    }
 }

@@ -135,7 +135,7 @@ $readonly = empty($development_state['status']) ? '' : 'readonly';
                 <h2>SMART objectives</h2>
                 <p>Read the guideline to help you shape up objectives for this year.</p>
             </a>
-            <a class="green-bg " href="#">
+            <a class="green-bg " target="_blank" href="/myPerformance_guildline_Final.pdf">
                 <span><img src="/html/assets/images/icons/user-guidelines.png"></span>
                 <h2>User guidelines</h2>
                 <p>Learn how to use all features of MyPerformance system. </p>

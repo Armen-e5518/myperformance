@@ -15,6 +15,14 @@ use common\models\UserBehavioral;
  */
 class UserBehavioralSearch extends UserBehavioral
 {
+   public function behaviors()
+   {
+      return [
+         [
+            'class' => \backend\behaviors\AdminAccess::class
+         ]
+      ];
+   }
     /**
      * {@inheritdoc}
      */

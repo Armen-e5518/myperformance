@@ -12,6 +12,14 @@ use common\models\Goals as GoalsModel;
  */
 class Goals extends GoalsModel
 {
+   public function behaviors()
+   {
+      return [
+         [
+            'class' => \backend\behaviors\AdminAccess::class
+         ]
+      ];
+   }
     /**
      * {@inheritdoc}
      */

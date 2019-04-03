@@ -12,6 +12,14 @@ use common\models\Years;
  */
 class YearsSearch extends Years
 {
+   public function behaviors()
+   {
+      return [
+         [
+            'class' => \backend\behaviors\AdminAccess::class
+         ]
+      ];
+   }
     /**
      * {@inheritdoc}
      */

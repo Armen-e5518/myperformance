@@ -14,6 +14,14 @@ use common\models\Conversations;
  */
 class ConversationsSearch extends Conversations
 {
+   public function behaviors()
+   {
+      return [
+         [
+            'class' => \backend\behaviors\AdminAccess::class
+         ]
+      ];
+   }
     /**
      * {@inheritdoc}
      */

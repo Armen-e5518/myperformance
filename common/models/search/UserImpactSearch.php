@@ -15,6 +15,14 @@ use common\models\UserImpact;
  */
 class UserImpactSearch extends UserImpact
 {
+   public function behaviors()
+   {
+      return [
+         [
+            'class' => \backend\behaviors\AdminAccess::class
+         ]
+      ];
+   }
     /**
      * {@inheritdoc}
      */

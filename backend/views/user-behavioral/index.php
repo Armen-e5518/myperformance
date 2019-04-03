@@ -88,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'date',
             //'manager_comment:ntext',
 
-            ['class' => 'yii\grid\ActionColumn', 'template' => '{update}{delete}',]
+           ['class' => 'yii\grid\ActionColumn', 'template' => $searchModel->getTemplate(),],
         ],
     ]); ?>
 </div>

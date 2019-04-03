@@ -56,3 +56,13 @@ span.select2-selection__clear {
 .element {
     cursor: pointer;
 }
+
+.send_mail {
+    cursor: pointer;
+}
+
+.modal-title {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #4f2d7f;
+}

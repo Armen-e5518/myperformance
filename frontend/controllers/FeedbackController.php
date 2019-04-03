@@ -8,10 +8,11 @@ use common\models\Feedbacks;
 use frontend\components\Mail;
 use frontend\models\External;
 use frontend\models\Internal;
+use frontend\models\MailTo;
 use kartik\mpdf\Pdf;
 use Yii;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
+use yii\web\Controller;
 
 /**
  * BehavioralFeedbackController implements the CRUD actions for BehavioralFeedback model.
@@ -32,8 +33,12 @@ class FeedbackController extends Controller
             ],
             'access' => [
                 'class' => \yii\filters\AccessControl::className(),
-                'only' => [],
+//                'only' => ['user-pdf'],
                 'rules' => [
+                    [
+                        'actions' => ['user-pdf', 'pdf'],
+                        'allow' => true,
+                    ],
                     // allow authenticated users
                     [
                         'allow' => true,
@@ -71,11 +76,19 @@ class FeedbackController extends Controller
                 };
             }
         }
-
+        $MailTo = new MailTo();
+        if ($MailTo->load(Yii::$app->request->post()) && $MailTo->validate()) {
+            if ($MailTo->load(Yii::$app->request->post(), 'MailTo')) {
+                if (Mail::SandMailTo($MailTo)) {
+                    return $this->redirect(['/feedback', 'year' => $year]);
+                };
+            }
+        }
         return $this->render('index', [
             'year' => $year,
             'internal_model' => $internal_model,
             'External_model' => $External_model,
+            'MailTo' => $MailTo,
             'users' => User::GetAllUsersNotMe(),
             'feedback_provided' => Feedbacks::GetProvided(Yii::$app->user->getId(), $year),
             'feedback_received' => Feedbacks::GetReceived(Yii::$app->user->getId(), $year),
@@ -122,13 +135,13 @@ class FeedbackController extends Controller
         ]);
     }
 
-    public function actionPdf($year, $id)
+    public function actionPdf($year)
     {
         $this->layout = false;
-        $model = Feedbacks::findOne($id);
+        $feedbacks = Feedbacks::GetReceivedForReport(Yii::$app->user->getId(), $year);
         $content = $this->renderPartial('pdf-content', [
             'year' => $year,
-            'model' => $model,
+            'feedbacks' => $feedbacks,
             'users' => User::GetAllUsersIndex(),
         ]);
         $pdf = new Pdf([
@@ -163,5 +176,46 @@ class FeedbackController extends Controller
         return $pdf->render();
     }
 
-
+    public function actionUserPdf($year, $id)
+    {
+        $this->layout = false;
+        $user_name = User::GetUserNameById($id);
+        $feedbacks = Feedbacks::GetReceivedForReport($id, $year);
+        $content = $this->renderPartial('pdf-content', [
+            'year' => $year,
+            'feedbacks' => $feedbacks,
+            'users' => User::GetAllUsersIndex(),
+        ]);
+        $pdf = new Pdf([
+// set to use core fonts only
+            'mode' => Pdf::MODE_CORE,
+// A4 paper format
+            'format' => Pdf::FORMAT_A4,
+// portrait orientation
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+// stream to browser inline
+            'destination' => Pdf::DEST_BROWSER,
+// your html content input
+            'content' => $content,
+// format content from your own css file if needed or use the
+//             enhanced bootstrap css built by Krajee for mPDF formatting
+//            'cssFile' => '@web/css/pdf-css.css',
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+            // any css to be embedded if required
+//            'cssInline' => '.kv-heading-1{font-size:18px}',
+// set mPDF properties on the fly
+            'options' => ['title' => 'MyPerformance ' . date('YY-MM-DD')],
+// call mPDF methods on the fly
+            'methods' => [
+                'SetTitle' => $user_name . ' | ' . $year,
+                'SetHeader' => ['MyPerformance ' . date('Y-m-d')],
+                'SetFooter' => ['MyPerformance | {PAGENO} |'],
+            ]
+        ]);
+//        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+//        $headers = Yii::$app->response->headers;
+//        $headers->add('Content-Type', 'application/pdf');
+        // return the pdf output as per the destination setting
+        return $pdf->render();
+    }
 }

@@ -26,6 +26,7 @@ use yii\web\UploadedFile;
  * @property int $created_at
  * @property int $updated_at
  * @property int $position
+ * @property int $admin_role
  */
 class User extends \yii\db\ActiveRecord
 {
@@ -126,8 +127,8 @@ class User extends \yii\db\ActiveRecord
     public function SaveUser()
     {
         if (!$this->validate()) {
-            print_r($this->getErrors());
-            exit;
+//            print_r($this->getErrors());
+//            exit;
             return false;
         }
         $user = new \common\models\User();

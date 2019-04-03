@@ -12,6 +12,14 @@ use common\models\BehavioralFeedback;
  */
 class BehavioralFeedbackSearch extends BehavioralFeedback
 {
+   public function behaviors()
+   {
+      return [
+         [
+            'class' => \backend\behaviors\AdminAccess::class
+         ]
+      ];
+   }
     /**
      * {@inheritdoc}
      */

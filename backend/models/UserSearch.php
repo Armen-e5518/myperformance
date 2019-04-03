@@ -12,6 +12,14 @@ use backend\models\User;
  */
 class UserSearch extends User
 {
+   public function behaviors()
+   {
+      return [
+         [
+            'class' => \backend\behaviors\AdminAccess::class
+         ]
+      ];
+   }
     /**
      * {@inheritdoc}
      */
@@ -19,7 +27,7 @@ class UserSearch extends User
     {
         return [
             [['id', 'status', 'created_at', 'updated_at', 'manager_id','department_id'], 'integer'],
-            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'last_name', 'first_name'], 'safe'],
+            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'last_name', 'first_name','position'], 'safe'],
         ];
     }
 
@@ -74,7 +82,8 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'auth_key', $this->auth_key])
             ->andFilterWhere(['like', 'last_name', $this->last_name])
             ->andFilterWhere(['like', 'first_name', $this->first_name])
-            ->andFilterWhere(['like', 'email', $this->email]);
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'position', $this->position]);
 
         return $dataProvider;
     }

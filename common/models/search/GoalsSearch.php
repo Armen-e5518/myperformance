@@ -14,6 +14,14 @@ use common\models\Goals;
  */
 class GoalsSearch extends Goals
 {
+   public function behaviors()
+   {
+      return [
+         [
+            'class' => \backend\behaviors\AdminAccess::class
+         ]
+      ];
+   }
     /**
      * {@inheritdoc}
      */

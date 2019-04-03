@@ -12,6 +12,14 @@ use common\models\GoalsFeedback;
  */
 class GoalsFeedbackSearch extends GoalsFeedback
 {
+   public function behaviors()
+   {
+      return [
+         [
+            'class' => \backend\behaviors\AdminAccess::class
+         ]
+      ];
+   }
     /**
      * {@inheritdoc}
      */

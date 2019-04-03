@@ -12,6 +12,14 @@ use common\models\ImpactFeedback;
  */
 class ImpactFeedbackSearch extends ImpactFeedback
 {
+   public function behaviors()
+   {
+      return [
+         [
+            'class' => \backend\behaviors\AdminAccess::class
+         ]
+      ];
+   }
     /**
      * {@inheritdoc}
      */

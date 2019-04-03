@@ -93,7 +93,7 @@ class User extends \yii\db\ActiveRecord
             'last_name' => 'Last name',
             'first_name' => 'First name',
             'auth_key' => 'Auth Key',
-            'password_hash' => 'Password',
+            'password_hash' => 'Change password',
             'password_reset_token' => 'Password Reset Token',
             'email' => 'Email',
             'status' => 'Status',
@@ -101,7 +101,7 @@ class User extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'department_id' => 'Department',
             'manager_id' => 'Manager',
-            'password_repeat' => 'Confirm password',
+            'password_repeat' => 'Repeat new password',
             'position' => 'position',
 
 

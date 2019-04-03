@@ -12,13 +12,21 @@ use yii\data\ActiveDataProvider;
  */
 class UserDevelopmentStateSearch extends UserDevelopmentState
 {
+   public function behaviors()
+   {
+      return [
+         [
+            'class' => \backend\behaviors\AdminAccess::class
+         ]
+      ];
+   }
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'user_id', 'manager_id', 'year', 'status'], 'integer'],
+            [['id', 'user_id', 'manager_id', 'year', 'status', 'date_manager', 'date_user'], 'integer'],
         ];
     }
 
@@ -72,7 +80,8 @@ class UserDevelopmentStateSearch extends UserDevelopmentState
             'uds.year' => $this->year,
             'uds.status' => $this->status,
         ]);
-
+        $query->andFilterWhere(['like', 'uds.date_manager', $this->date_manager]);
+        $query->andFilterWhere(['like', 'uds.date_user', $this->date_user]);
         return $dataProvider;
     }
 }

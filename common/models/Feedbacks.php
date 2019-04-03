@@ -70,7 +70,6 @@ class Feedbacks extends \yii\db\ActiveRecord
         return [
             [['user_id', 'status', 'type',
                 'feedback_type',
-
                 'collaboration',
                 'leadership',
                 'excellence',
@@ -131,9 +130,9 @@ class Feedbacks extends \yii\db\ActiveRecord
         ];
     }
 
-    public function GetPdfImage($item, $value)
+    public static function GetPdfImage($model, $item, $value)
     {
-        return $this->$item == $value ? '<img src="/images/radio_selected.png" alt="">' : '<img src="/images/radio.png" alt="">';
+        return $model[$item] == $value ? '<img src="/images/radio_selected.png" alt="">' : '<img src="/images/radio.png" alt="">';
     }
 
     function saveNewInternal($year)
@@ -235,6 +234,42 @@ class Feedbacks extends \yii\db\ActiveRecord
                 'f.user_id' => $user_id,
                 'f.is_request' => self::IS_NOT_REQUEST,
                 'f.year' => Years::GetYearIdByYear($year)
+            ])
+            ->orderBy(['f.id' => SORT_ASC])
+            ->all();
+    }
+
+    public static function GetReceivedForReport($user_id, $year)
+    {
+        return (new \yii\db\Query())
+            ->select(
+                [
+                    'f.*',
+                    'u.first_name',
+                    'u1.first_name as u_first_name',
+                    'u.last_name',
+                    'u1.last_name as u_last_name',
+                    'u.avatar',
+                    'u1.avatar as u_avatar',
+                    'd.title as departments',
+                    'd1.title as u_departments',
+                ])
+            ->from(self::tableName() . ' f')
+            ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = f.owner_id')
+            ->leftJoin(\backend\models\User::tableName() . ' u1', 'u1.id = f.user_id')
+            ->leftJoin(Departments::tableName() . ' d', 'd.id = u.department_id')
+            ->leftJoin(Departments::tableName() . ' d1', 'd1.id = u1.department_id')
+            ->where([
+                'f.owner_id' => $user_id,
+                'f.is_request' => self::IS_REQUEST,
+                'f.year' => Years::GetYearIdByYear($year),
+                'f.status' => self::STATUS_RECEIVED,
+            ])
+            ->orWhere([
+                'f.user_id' => $user_id,
+                'f.is_request' => self::IS_NOT_REQUEST,
+                'f.year' => Years::GetYearIdByYear($year),
+                'f.status' => self::STATUS_RECEIVED,
             ])
             ->orderBy(['f.id' => SORT_ASC])
             ->all();

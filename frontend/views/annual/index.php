@@ -4,7 +4,7 @@ $this->registerJsFile('/js/common.js');
 //$this->registerJsFile('/js/feedback/feedback-src.js');
 $this->params['feedback'] = true;
 
-$this->title = "Annual appraisal | " . $year ;
+$this->title = "Annual appraisal | " . $year;
 ?>
 
 <div class="main-content">
@@ -50,7 +50,7 @@ $this->title = "Annual appraisal | " . $year ;
                                     competencies </a></td>
                             <td class="blue-text"><a href="/impact/<?= $year ?>">View impact</a></td>
                             <td class="blue-text"><a href="/development/<?= $year ?>">View development plan </a></td>
-                            <td class="red-text"><a href="#"><i class="far fa-file-pdf"></i></a></td>
+                            <td class="red-text"><a target="_blank" href="/annual-pdf/<?= $year ?>"><i class="far fa-file-pdf"></i></a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -99,7 +99,9 @@ $this->title = "Annual appraisal | " . $year ;
                                                 href="/user-development/<?= $year . '/' . $my_user['id'] ?>">View
                                             development plan </a>
                                     </td>
-                                    <td class="red-text"><a href="#"><i class="far fa-file-pdf"></i></a></td>
+                                    <td class="red-text">
+                                        <a target="_blank" href="/annual-user-pdf/<?= $year . '/' . $my_user['id'] ?>"><i class="far fa-file-pdf"></i></a>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
@@ -116,7 +118,7 @@ $this->title = "Annual appraisal | " . $year ;
                 <h2>SMART objectives</h2>
                 <p>Read the guideline to help you shape up objectives for this year.</p>
             </a>
-            <a class="green-bg " href="#">
+            <a class="green-bg " target="_blank" href="/myPerformance_guildline_Final.pdf">
                 <span><img src="/html/assets/images/icons/user-guidelines.png"></span>
                 <h2>User guidelines</h2>
                 <p>Learn how to use all features of MyPerformance system. </p>

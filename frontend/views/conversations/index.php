@@ -27,7 +27,7 @@ $this->title = "Coaching conversations |" . $year;
                         session
                         <i class="fas fa-plus"></i></a>
                 <?php endif; ?>
-                <a class="btn-border download-report" href="#">Download report <i class="far fa-file-pdf"></i></a>
+                <a class="btn-border download-report" target="_blank" href="/conversations-pdf/<?= $year ?>">Download report <i class="far fa-file-pdf"></i></a>
             </div>
             <div class="table-block">
                 <div class="table-title flex"><img src="/html/assets/images/icons/coaching-sessions.png"> Sessions

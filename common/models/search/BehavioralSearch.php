@@ -12,6 +12,14 @@ use common\models\Behavioral;
  */
 class BehavioralSearch extends Behavioral
 {
+   public function behaviors()
+   {
+      return [
+         [
+            'class' => \backend\behaviors\AdminAccess::class
+         ]
+      ];
+   }
     /**
      * {@inheritdoc}
      */

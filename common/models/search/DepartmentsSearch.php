@@ -12,6 +12,14 @@ use common\models\Departments;
  */
 class DepartmentsSearch extends Departments
 {
+   public function behaviors()
+   {
+      return [
+         [
+            'class' => \backend\behaviors\AdminAccess::class
+         ]
+      ];
+   }
     /**
      * {@inheritdoc}
      */

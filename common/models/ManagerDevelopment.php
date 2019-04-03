@@ -13,6 +13,10 @@ namespace common\models;
  */
 class ManagerDevelopment extends \yii\db\ActiveRecord
 {
+    public $first_name;
+    public $last_name;
+    public $m_first_name;
+    public $m_last_name;
     /**
      * {@inheritdoc}
      */
@@ -39,8 +43,8 @@ class ManagerDevelopment extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'manager_id' => 'Manager ID',
+            'user_id' => 'User ',
+            'manager_id' => 'Manager ',
             'manager_comment' => 'Manager comment',
             'year' => 'Year',
         ];

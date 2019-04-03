@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'comment:ntext',
             //'date',
 
-            ['class' => 'yii\grid\ActionColumn'],
+           ['class' => 'yii\grid\ActionColumn', 'template' => $searchModel->getTemplate(),],
         ],
     ]); ?>
 </div>

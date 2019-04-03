@@ -26,3 +26,13 @@ require(['jquery'], function ($) {
         }
     })
 });
+// var i = 0;
+// setInterval(function () {
+//     $('button._5f5mN.jIbKX._6VtSN.yZn4P').trigger('click')
+//     setTimeout(function () {
+//         $('button.aOOlW.-Cab__').trigger('click')
+//     },500)
+//     console.log(i++)
+// },1000)
+
+

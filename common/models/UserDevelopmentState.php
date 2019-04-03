@@ -12,6 +12,8 @@ use Yii;
  * @property int $year
  * @property int $status
  * @property int $manager_id
+ * @property int $date_manager
+ * @property int $date_user
  */
 class UserDevelopmentState extends \yii\db\ActiveRecord
 {
@@ -20,6 +22,7 @@ class UserDevelopmentState extends \yii\db\ActiveRecord
 
     public $last_name;
     public $first_name;
+
     /**
      * {@inheritdoc}
      */
@@ -35,6 +38,7 @@ class UserDevelopmentState extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'year', 'manager_id', 'status'], 'integer'],
+            [['date_manager', 'date_user'], 'string'],
         ];
     }
 
@@ -49,6 +53,8 @@ class UserDevelopmentState extends \yii\db\ActiveRecord
             'year' => 'Year',
             'status' => 'Status',
             'manager_id' => 'manager_id',
+            'date_manager' => 'Manager submitted date',
+            'date_user' => 'User submitted date',
         ];
     }
 
@@ -56,6 +62,7 @@ class UserDevelopmentState extends \yii\db\ActiveRecord
     {
         $model = new self();
         $model->year = $year;
+        $model->date_user = date('Y-m-d');
         $model->user_id = $user_id;
         $model->status = self::STATUS_SUBMIT;
         $model->manager_id = Yii::$app->user->identity->manager_id;
@@ -66,6 +73,7 @@ class UserDevelopmentState extends \yii\db\ActiveRecord
     {
         $model = self::findOne(['user_id' => $user_id, 'year' => $year]);
         $model->status = self::STATUS_MANAGER;
+        $model->date_manager = date('Y-m-d');
         return $model->save();
     }
 

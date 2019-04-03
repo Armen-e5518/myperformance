@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'year',
 //            'status',
 
-            ['class' => 'yii\grid\ActionColumn', 'template' => '{update}{delete}',],
+           ['class' => 'yii\grid\ActionColumn', 'template' => $searchModel->getTemplate(),],
         ],
     ]); ?>
 </div>

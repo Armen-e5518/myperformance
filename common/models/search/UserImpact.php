@@ -12,6 +12,14 @@ use common\models\UserImpact as UserImpactModel;
  */
 class UserImpact extends UserImpactModel
 {
+   public function behaviors()
+   {
+      return [
+         [
+            'class' => \backend\behaviors\AdminAccess::class
+         ]
+      ];
+   }
     /**
      * {@inheritdoc}
      */

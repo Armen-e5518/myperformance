@@ -13,6 +13,14 @@ use yii\data\ActiveDataProvider;
  */
 class ImpactSearch extends Impact
 {
+   public function behaviors()
+   {
+      return [
+         [
+            'class' => \backend\behaviors\AdminAccess::class
+         ]
+      ];
+   }
     /**
      * {@inheritdoc}
      */
