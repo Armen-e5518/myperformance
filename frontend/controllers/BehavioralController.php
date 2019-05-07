@@ -62,7 +62,6 @@ class BehavioralController extends Controller
           $model->user_comment = $comment['user_comment'];
           $model->save();
         }
-
       }
       return $this->redirect(['annual/' . $year]);
     }

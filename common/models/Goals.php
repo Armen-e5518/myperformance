@@ -18,6 +18,7 @@ use Yii;
  * @property int $year
  * @property string $date
  * @property int $status
+ * @property int $department_id
  */
 class Goals extends \yii\db\ActiveRecord
 {
@@ -27,6 +28,8 @@ class Goals extends \yii\db\ActiveRecord
 
     public $last_name;
     public $first_name;
+    public $department_id;
+    public $department_title;
 
     /**
      * {@inheritdoc}
@@ -65,6 +68,7 @@ class Goals extends \yii\db\ActiveRecord
             'year' => 'Year',
             'date' => 'Date',
             'status' => 'Status',
+            'department_id' => 'Department',
         ];
     }
 

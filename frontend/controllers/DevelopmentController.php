@@ -112,7 +112,7 @@ class DevelopmentController extends Controller
     {
         if (Check::IsNotEmpty($year) && UserDevelopmentState::Submit(Yii::$app->user->getId(), $year)) {
             Yii::$app->session->setFlash('success', 'Submitted!');
-            Mail::SubmitUser();
+            Mail::SubmitUser($year);
             return $this->redirect(['/development/' . $year]);
         } else {
             Yii::$app->session->setFlash('error', 'Please complete all previous steps to submit your final annual report.');
@@ -124,7 +124,7 @@ class DevelopmentController extends Controller
     {
         if (Check::IsNotEmptyManager($year, $id) && UserDevelopmentState::SubmitManager($id, $year)) {
             Yii::$app->session->setFlash('success', 'Submitted!');
-            Mail::SubmitManager($id);
+            Mail::SubmitManager($id,$year);
             return $this->redirect(['/user-development/' . $year . '/' . $id]);
         } else {
             Yii::$app->session->setFlash('error', 'Please complete all previous steps to submit your final annual report.');
