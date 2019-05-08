@@ -47,15 +47,25 @@ class GoalsSearch extends Goals
     * Creates data provider instance with search query applied
     *
     * @param array $params
+    * @param $count
     *
     * @return ActiveDataProvider
     */
-   public function search($params)
+   public function search($params, $count)
    {
       $query = Goals::find()
          ->from(Goals::tableName() . ' g')
          ->select([
-            'g.*',
+            'g.id',
+            'g.user_id' ,
+            'g.description',
+            'g.my_comment',
+            'g.measure_success',
+            'g.timeframe' ,
+            'g.support_needed' ,
+            'g.manager_comments',
+            'g.date',
+            'g.status',
             'u.first_name',
             'u.last_name',
             'y.year as year',
@@ -63,7 +73,8 @@ class GoalsSearch extends Goals
          ])
          ->leftJoin(User::tableName() . ' u', 'u.id = g.user_id')
          ->leftJoin(Departments::tableName() . ' d', 'd.id = u.department_id')
-         ->leftJoin(Years::tableName() . ' y', 'y.id = g.year');
+         ->leftJoin(Years::tableName() . ' y', 'y.id = g.year')
+         ->orderBy(['y.year' => SORT_ASC, 'g.user_id' => SORT_ASC]);
 
       // add conditions that should always apply here
 
@@ -74,8 +85,6 @@ class GoalsSearch extends Goals
       $this->load($params);
 
       if (!$this->validate()) {
-         // uncomment the following line if you do not want to return any records when validation fails
-         // $query->where('0=1');
          return $dataProvider;
       }
 
@@ -85,8 +94,6 @@ class GoalsSearch extends Goals
          'user_id' => $this->user_id,
          'g.year' => $this->year,
          'd.id' => $this->department_id,
-//            'date' => $this->date,
-//            'status' => $this->status,
       ]);
 
       $query->andFilterWhere(['like', 'description', $this->description])
@@ -96,6 +103,10 @@ class GoalsSearch extends Goals
          ->andFilterWhere(['like', 'support_needed', $this->support_needed])
          ->andFilterWhere(['like', 'manager_comments', $this->manager_comments]);
 
+      if ($count) {
+         return $query->groupBy(['g.user_id'])
+            ->count();
+      }
       return $dataProvider;
    }
 }

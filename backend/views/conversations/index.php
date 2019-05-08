@@ -76,6 +76,21 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 //            'date',
             //'status',
+           [
+              'attribute' => 'department_id',
+//                'format' => 'html',
+              'value' => function ($data) {
+                 return $data->department_title;
+              },
+              'filter' => \kartik\select2\Select2::widget([
+                 'model' => $searchModel,
+                 'attribute' => 'department_id',
+                 'data' => \common\models\Departments::GetAll(),
+                 'options' => [
+                    'placeholder' => 'Departments...',
+                 ]
+              ]),
+           ],
             [
                 'attribute' => 'year',
                 'filter' => \kartik\select2\Select2::widget([

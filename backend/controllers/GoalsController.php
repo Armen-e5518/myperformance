@@ -2,126 +2,130 @@
 
 namespace backend\controllers;
 
-use Yii;
 use common\models\Goals;
 use common\models\search\GoalsSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * GoalsController implements the CRUD actions for Goals model.
  */
 class GoalsController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
+   /**
+    * {@inheritdoc}
+    */
+   public function behaviors()
+   {
+      return [
+         'verbs' => [
+            'class' => VerbFilter::className(),
+            'actions' => [
+               'delete' => ['POST'],
             ],
-        ];
-    }
+         ],
+      ];
+   }
 
-    /**
-     * Lists all Goals models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $searchModel = new GoalsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+   /**
+    * Lists all Goals models.
+    * @return mixed
+    */
+   public function actionIndex()
+   {
+      $searchModel = new GoalsSearch();
+      $dataProvider = $searchModel->search(Yii::$app->request->queryParams, false);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
 
-    /**
-     * Displays a single Goals model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+      return $this->render('index', [
+         'searchModel' => $searchModel,
+         'dataProvider' => $dataProvider,
+         'user_count' => $searchModel->search(Yii::$app->request->queryParams, true),
+         'all_users' => Goals::find()->groupBy('user_id')->count(),
 
-    /**
-     * Creates a new Goals model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Goals();
+      ]);
+   }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+   /**
+    * Displays a single Goals model.
+    * @param integer $id
+    * @return mixed
+    * @throws NotFoundHttpException if the model cannot be found
+    */
+   public function actionView($id)
+   {
+      return $this->render('view', [
+         'model' => $this->findModel($id),
+      ]);
+   }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
+   /**
+    * Creates a new Goals model.
+    * If creation is successful, the browser will be redirected to the 'view' page.
+    * @return mixed
+    */
+   public function actionCreate()
+   {
+      $model = new Goals();
 
-    /**
-     * Updates an existing Goals model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
+      if ($model->load(Yii::$app->request->post()) && $model->save()) {
+         return $this->redirect(['view', 'id' => $model->id]);
+      }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+      return $this->render('create', [
+         'model' => $model,
+      ]);
+   }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
+   /**
+    * Updates an existing Goals model.
+    * If update is successful, the browser will be redirected to the 'view' page.
+    * @param integer $id
+    * @return mixed
+    * @throws NotFoundHttpException if the model cannot be found
+    */
+   public function actionUpdate($id)
+   {
+      $model = $this->findModel($id);
 
-    /**
-     * Deletes an existing Goals model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+      if ($model->load(Yii::$app->request->post()) && $model->save()) {
+         return $this->redirect(['view', 'id' => $model->id]);
+      }
 
-        return $this->redirect(['index']);
-    }
+      return $this->render('update', [
+         'model' => $model,
+      ]);
+   }
 
-    /**
-     * Finds the Goals model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Goals the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Goals::findOne($id)) !== null) {
-            return $model;
-        }
+   /**
+    * Deletes an existing Goals model.
+    * If deletion is successful, the browser will be redirected to the 'index' page.
+    * @param integer $id
+    * @return mixed
+    * @throws NotFoundHttpException if the model cannot be found
+    */
+   public function actionDelete($id)
+   {
+      $this->findModel($id)->delete();
 
-        throw new NotFoundHttpException('The requested page does not exist.');
-    }
+      return $this->redirect(['index']);
+   }
+
+   /**
+    * Finds the Goals model based on its primary key value.
+    * If the model is not found, a 404 HTTP exception will be thrown.
+    * @param integer $id
+    * @return Goals the loaded model
+    * @throws NotFoundHttpException if the model cannot be found
+    */
+   protected function findModel($id)
+   {
+      if (($model = Goals::findOne($id)) !== null) {
+         return $model;
+      }
+
+      throw new NotFoundHttpException('The requested page does not exist.');
+   }
 }
