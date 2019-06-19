@@ -2,12 +2,13 @@
 
 ?>
 
-<div class="container">
-    <h3>Coaching sessions | <?= \frontend\models\User::getCurrentUserName() ?> | <?= $year ?></h3>
+<div class="container" id="content">
+    <h1 style="color: #fff">Coaching sessions  | <?= $year ?></h1>
+   <br>
     <div class="table-block">
-        <h4>Received</h4>
+        <h3 style="margin: 0">Received</h3>
         <div class="table-item">
-            <table>
+           <table cellpadding="5" width="100%">
                 <thead>
                 <tr>
                     <th>Received from</th>
@@ -21,19 +22,15 @@
                     <?php foreach ($provided as $item): ?>
                         <tr>
                             <td>
-                                <span>
-                                    <img width="50px" src="/users/<?= $item['avatar'] ?>" alt="" class="request-to-whom">
-                                </span>
                                 <?= $item['first_name'] ?> <?= $item['last_name'] ?>
                             </td>
-                            <td><?= $item['notes'] ?>
-                                <!--                                        <a href="#" class="red-text">View more</a>-->
+                            <td>
+                               <?= $item['notes'] ?>
                             </td>
                             <td class="red-text">
                                 <?php if (!empty($item['attachment'])): ?>
                                     <i class="fas fa-download"></i><a
-                                            href="/attachments/<?= $item['attachment'] ?>" target="_blank">
-                                        Document</a>
+                                            href="/attachments/<?= $item['attachment'] ?>" target="_blank">Download</a>
                                 <?php endif; ?>
                             </td>
                             <td><?= \backend\components\Helper::GetDateByTime($item['date']) ?></td>
@@ -44,10 +41,11 @@
             </table>
         </div>
     </div>
+   <br>
     <div class="table-block">
-        <h4>Provided</h4>
+        <h3 style="margin: 0">Provided</h3>
         <div class="table-item">
-            <table>
+            <table cellpadding="5" width="100%">
                 <thead>
                 <tr>
                     <th>Provided to</th>
@@ -60,25 +58,24 @@
                 <?php if (!empty($received)): $flag = false; ?>
                     <?php foreach ($received as $item): ?>
                         <tr>
-                            <td><span><img width="50px" src="/users/<?= $item['avatar'] ?>" alt=""
-                                           class="request-to-whom"></span> <?= $item['first_name'] ?> <?= $item['last_name'] ?>
+                            <td>
+                               <?= $item['first_name'] ?> <?= $item['last_name'] ?>
                             </td>
                             <td>
                                 <?php if (!empty($item['notes'])): ?>
                                     <?= $item['notes'] ?>
                                 <?php endif; ?>
                                 <br>
-
                             </td>
                             <td class="red-text">
                                 <?php if (!empty($item['attachment'])): ?>
                                     <i class="fas fa-download"></i>
                                     <a href="/attachments/<?= $item['attachment'] ?>"
-                                       target="_blank"> Document</a>
+                                       target="_blank">Download</a>
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <?= \backend\components\Helper::GetDateByTime($item['date']) ?>
+                               <?= \backend\components\Helper::GetDateByTime($item['date']) ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

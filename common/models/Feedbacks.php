@@ -132,7 +132,7 @@ class Feedbacks extends \yii\db\ActiveRecord
 
     public static function GetPdfImage($model, $item, $value)
     {
-        return $model[$item] == $value ? '<img src="/images/radio_selected.png" alt="">' : '<img src="/images/radio.png" alt="">';
+        return $model[$item] == $value ? '<img src="/images/radio_selected.png" alt="">' : '<img src="/images/radio_empty.png" alt="">';
     }
 
     function saveNewInternal($year)

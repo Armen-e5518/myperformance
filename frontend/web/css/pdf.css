@@ -1,0 +1,35 @@
+p {
+    color: #000 !important;
+    font-size: 15px;
+}
+
+h1 {
+    color: #fff !important;
+    background-color: #00a7b5;
+    padding: 5px;
+    padding-left: 15px;
+}
+
+h3 {
+    background-color: #e7e7e7
+}
+
+#content table {
+    border-collapse: collapse;
+}
+
+#content table,#content th,#content td {
+    border: 1px solid black;
+}
+
+#content table th {
+    padding: 5px;
+}
+
+#content thead th {
+    text-align: center;
+    /*padding-left: 5px;*/
+    padding: 2px;
+    color: #fff;
+    background-color: #00a7b5;
+}
